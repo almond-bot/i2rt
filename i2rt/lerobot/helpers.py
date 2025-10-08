@@ -6,6 +6,9 @@ follower robots and leader teleoperators.
 """
 
 import numpy as np
+import time
+
+from i2rt.robots.motor_chain_robot import MotorChainRobot
 
 # YAM arm motor names (6 joints) + gripper
 YAM_ARM_MOTOR_NAMES = [
@@ -17,6 +20,27 @@ YAM_ARM_MOTOR_NAMES = [
     "wrist_rotate",
     "gripper",
 ]
+
+
+class YAMLeaderRobot:
+    def __init__(self, robot: MotorChainRobot):
+        self._robot = robot
+        self._motor_chain = robot.motor_chain
+
+    def get_info(self) -> np.ndarray:
+        qpos = self._robot.get_observations()["joint_pos"]
+        encoder_obs = self._motor_chain.get_same_bus_device_states()
+        time.sleep(0.01)
+        gripper_cmd = 1 - encoder_obs[0].position
+        qpos_with_gripper = np.concatenate([qpos, [gripper_cmd]])
+        return qpos_with_gripper, encoder_obs[0].io_inputs
+
+    def command_joint_pos(self, joint_pos: np.ndarray) -> None:
+        assert joint_pos.shape[0] == 6
+        self._robot.command_joint_pos(joint_pos)
+
+    def update_kp_kd(self, kp: np.ndarray, kd: np.ndarray) -> None:
+        self._robot.update_kp_kd(kp, kd)
 
 
 def normalize_arm_position(val_rad: float, min_rad: float, max_rad: float, use_degrees: bool) -> float:

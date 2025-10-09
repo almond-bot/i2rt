@@ -10,7 +10,7 @@ import time
 
 from i2rt.robots.motor_chain_robot import MotorChainRobot
 
-# YAM arm motor names (6 joints) + gripper
+
 YAM_ARM_MOTOR_NAMES = [
     "joint1",
     "joint2",
@@ -20,6 +20,7 @@ YAM_ARM_MOTOR_NAMES = [
     "joint6",
     "gripper",
 ]
+YAM_EE_LINK = "link_6"
 
 
 class YAMLeaderRobot:

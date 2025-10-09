@@ -12,12 +12,12 @@ from i2rt.robots.motor_chain_robot import MotorChainRobot
 
 # YAM arm motor names (6 joints) + gripper
 YAM_ARM_MOTOR_NAMES = [
-    "shoulder_pan",
-    "shoulder_lift",
-    "elbow_flex",
-    "wrist_flex",
-    "wrist_roll",
-    "wrist_rotate",
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4",
+    "joint5",
+    "joint6",
     "gripper",
 ]
 

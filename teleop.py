@@ -7,8 +7,8 @@ from i2rt.robots.get_robot import get_yam_robot
 from scripts.minimum_gello import YAMLeaderRobot
 from i2rt.robots.utils import GripperType
 
-FREQUENCY = 10  # Hz
-BILATERAL_KP = 0.2  # Bilateral force feedback strength (0.0 = no feedback, 1.0 = full feedback)
+FREQUENCY = 100  # Hz
+BILATERAL_KP = 0.1  # Bilateral force feedback strength (0.0 = no feedback, 1.0 = full feedback)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--left", action="store_true", default=False)

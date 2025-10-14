@@ -463,8 +463,15 @@ class MotorChainRobot(Robot):
         logging.info(f"Entering zero_torque_mode for {self}")
         with self._command_lock:
             self._commands = JointCommands.init_all_zero(len(self.motor_chain))
-            self._kp = np.zeros(len(self.motor_chain))
-            self._kd = np.zeros(len(self.motor_chain))
+            self._commands.kp = np.zeros(len(self.motor_chain))
+            self._commands.kd = np.zeros(len(self.motor_chain))
+
+    def hold_current_position(self) -> None:
+        """Command the robot to hold its current position with default PD gains."""
+        logging.info(f"Entering hold_current_position mode for {self}")
+        with self._state_lock:
+            current_pos = self._joint_state.pos
+        self.command_joint_pos(current_pos)
 
     def get_observations(self) -> Dict[str, np.ndarray]:
         """Get the current observations of the robot.

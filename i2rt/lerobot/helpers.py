@@ -26,13 +26,13 @@ from i2rt.robots.utils import GripperType
 
 
 YAM_ARM_MOTOR_NAMES = [
-    "joint1",
-    "joint2",
-    "joint3",
-    "joint4",
-    "joint5",
-    "joint6",
-    "gripper",
+    "j1",
+    "j2",
+    "j3",
+    "j4",
+    "j5",
+    "j6",
+    "g",
 ]
 YAM_EE_LINK = "link_6"
 
